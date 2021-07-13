@@ -14,8 +14,8 @@ app.use("/api/tareas", require("./routes/tareas"));
 
 conectarDB();
 
-const PORT = process.env.PORT || 4000;
+const port = process.env.port || 4000;
 
-app.listen(PORT, () => {
-  console.log(`server corriendo en el puerto ${PORT}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`server corriendo en el puerto ${port}`);
 });
