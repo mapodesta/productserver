@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.json({ extended: true }));
 
+app.options("*", cors());
 app.use(cors({ origin: true }));
 
 app.use("/api/usuarios", require("./routes/usuarios"));
