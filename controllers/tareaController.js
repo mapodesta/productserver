@@ -35,7 +35,7 @@ exports.obtenerTareas = async (req, res) => {
       return res.status(400).json({ errores: errores.array() });
     }
 
-    let proyecto = await Proyecto.findById(req.body.proyecto);
+    let proyecto = await Proyecto.findById(req.query.proyecto);
     if (!proyecto) {
       res.status(404).json({ msg: "No existe ningun proyecto" });
     }
@@ -72,8 +72,8 @@ exports.actualizarTarea = async (req, res) => {
     }
 
     const nuevaTarea = {};
-    if (nombre) nuevaTarea.nombre = nombre;
-    if (estado) nuevaTarea.estado = estado;
+    nuevaTarea.nombre = nombre;
+    nuevaTarea.estado = estado;
 
     const tarea = await Tarea.findByIdAndUpdate(
       { _id: req.params.id },
@@ -89,7 +89,7 @@ exports.actualizarTarea = async (req, res) => {
 
 exports.eliminarTarea = async (req, res) => {
   try {
-    let proyecto = await Proyecto.findById(req.body.proyecto);
+    let proyecto = await Proyecto.findById(req.query.proyecto);
     if (!proyecto) {
       res.status(404).json({ msg: "No existe ningun proyecto" });
     }

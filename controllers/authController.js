@@ -17,9 +17,9 @@ exports.authUsuarios = async (req, res) => {
     if (!usuario) {
       res.status(400).json({ msg: "el usuario no existe !" });
     }
-    console.log(password, usuario.password);
+
     const passCorrecta = await bcryptjs.compare(password, usuario.password);
-    console.log(passCorrecta);
+
     if (!passCorrecta) {
       res.status(400).json({ msg: "contraseña incorrecta !" });
     }
@@ -43,5 +43,14 @@ exports.authUsuarios = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
+  }
+};
+
+exports.usuarioAutenticado = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id).select("-password");
+    res.json({ usuario });
+  } catch (error) {
+    res.status(500).json({ msg: "hubo un error" });
   }
 };
