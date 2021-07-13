@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json({ extended: true }));
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 
 app.use("/api/usuarios", require("./routes/usuarios"));
 app.use("/api/auth", require("./routes/auth"));
